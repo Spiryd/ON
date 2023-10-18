@@ -1,7 +1,7 @@
 # Maksymilian Neumann 2023
 
-function khan(type)
-    khan = (one(type) * 3) * ((one(type) * 4) / (one(type) * 3) - one(type)) - one(type)
+function khan(t)
+    khan = t(3.0) * ((t(4.0) / t(3.0)) - one(t)) - one(t)
     return khan
 end
 

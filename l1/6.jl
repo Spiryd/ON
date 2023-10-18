@@ -1,14 +1,14 @@
 # Maksymilian Neumann 2023
 
-function f(x)
+function f(x::Float64)
     return sqrt(x^2) - 1
 end
 
-function g(x)
+function g(x::Float64)
     return x^2 / (sqrt(x^2 + 1) + 1)
 end
 
-for i in 1:100 
-    println("f($i) = ", f(8.0^(-1*i)))
-    println("g($i) = ", g(8.0^(-1*i)))
+for i in 1:20 
+    println("f(8^-$i) = ", f(8.0^(-i)))
+    println("g(8^-$i) = ", g(8.0^(-i)))
 end

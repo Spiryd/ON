@@ -1,11 +1,21 @@
 # Maksymilian Neumann 2023
 
 function aprox(x_0::Float64, h::Float64)
-    return ((sin(x_0 + h) + cos(3*(x_0 + h)) - sin(x_0) + cos(3*x_0)) / h)
+    f(x) = sin(x) + cos(3x)
+    return (f(x_0 + h) - f(x_0)) / h
 end
 
+ex = (cos(1) - 3*sin(3))
 for n in 0:54
     a = aprox(1.0, 2.0^(-n))
-    ex = (cos(1.0) - 3*sin(3.0))
-    println("h: ", 2.0^(-n), " aprox: ", a, " err: ", abs(ex - a) )
+    println("h: ", 2.0^(-n), " aprox: ", a, " err: ", abs(a - ex) )
 end
+
+import Pkg
+Pkg.add("Plots")
+using Plots
+
+x = 0:54
+y = map(x -> abs(aprox(1.0, 2.0^(-x)) - ex), x)
+bar(x, y, legend=false, yaxis=:log)
+png("7.png")

@@ -22,10 +22,10 @@ function eta(type)
 end
 
 function machmax(type)
-    machmax = one(type)
+    machmax = prevfloat(one(type))
 
-    while isfinite(machmax + 1)
-        machmax += 1
+    while isfinite(machmax * 2)
+        machmax *= 2
     end
 
     return machmax
@@ -69,7 +69,7 @@ println()
 
 # Float16 max
 println("Float16")
-println("eta from my function: ",  machmax(Float16))
+println("max from my function: ",  machmax(Float16))
 println("max from floatmax(): ", floatmax(Float16))
 println()
 
@@ -81,6 +81,6 @@ println()
 
 # Float64 max
 println("Float64")
-println("eta from my function: ",  machmax(Float64))
+println("max from my function: ",  machmax(Float64))
 println("max from floatmax(): ", floatmax(Float64))
 println()
