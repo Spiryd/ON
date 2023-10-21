@@ -1,5 +1,12 @@
 # Maksymilian Neumann 2023
 
+"""
+Oblicza wynik z równania khana dla macheps w danej arytmetyce
+#Arguments
+- `t`: typ zmiennoprszecinkowy
+#Returns
+Zwracza równania khana
+"""
 function khan(t)
     khan = t(3.0) * ((t(4.0) / t(3.0)) - one(t)) - one(t)
     return khan

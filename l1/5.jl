@@ -1,5 +1,13 @@
 # Maksymilian Neumann 2023
 
+"""
+Scalar sum of two vectors bottom up
+#Arguments
+-`x`: 1D vector
+-`y`: 1D vector
+#Returns
+-`s`: Scalar sum of two vectors
+"""
 function a(x, y)
     s = 0.
     for i in 1:(length(x))
@@ -8,6 +16,14 @@ function a(x, y)
     return s
 end
 
+"""
+Scalar sum of two vectors top down
+#Arguments
+-`x`: 1D vector
+-`y`: 1D vector
+#Returns
+-`s`: Scalar sum of two vectors
+"""
 function b(x, y)
     s = 0.
     for i in (length(x)):1
@@ -16,25 +32,38 @@ function b(x, y)
     return s
 end
 
+"""
+Scalar sum of two vectors highest to lowest
+#Arguments
+-`x`: 1D vector
+-`y`: 1D vector
+#Returns
+Scalar sum of two vectors
+"""
 function c(x, y)
     s = zeros(length(x))
 
+    # mnożymy elemet wektora z jego odpowiednikiem
     for i in 1:(length(x))
         s[i] = x[i]*y[i]
     end
 
+    # znajdujemy dodatnie
     s_pos = s[s .> 0]
+    #sortujemy od najwiekszego do najmniejszego
     s_pos = sort(s_pos, rev = true)
-    #println(s_pos)
+    # znajdujemy ujemne
     s_neg = s[s .<= 0]
+    # sortujemy od najmniejszego do najwiekszego
     s_neg = sort(s_neg)
-    #println(s_neg)
 
+    # sumujemy ujemne w kolejności
     partial_neg = 0
     for i in s_neg
         partial_neg += i
     end
 
+    # sumujemy dodatnie w kolejności
     partial_pos = 0
     for i in s_pos
         partial_pos += i
@@ -43,26 +72,39 @@ function c(x, y)
     return partial_pos + partial_neg
 end
 
-
+"""
+Scalar sum of two vectors lowest to highest
+#Arguments
+-`x`: 1D vector
+-`y`: 1D vector
+#Returns
+Scalar sum of two vectors
+"""
 function d(x, y)
     s = zeros(length(x))
     
+    # mnożymy elemet wektora z jego odpowiednikiem
     for i in 1:(length(x))
         s[i] = x[i]*y[i]
     end
 
+    # znajdujemy dodatnie
     s_pos = s[s .> 0]
+    # sortujemy od najmniejszego do najwiekszego
     s_pos = sort(s_pos)
-    #println(s_pos)
-    s_neg = s[s .<= 0]
-    s_neg = sort(s_neg, rev = true)
-    #println(s_neg)
 
+    # znajdujemy ujemne
+    s_neg = s[s .<= 0]
+    # sortujemy od najwiekszego do najmniejszego
+    s_neg = sort(s_neg, rev = true)
+
+    # sumujemy ujemne w kolejności
     partial_neg = 0
     for i in s_neg
         partial_neg += i
     end
 
+    # sumujemy dodatnie w kolejności
     partial_pos = 0
     for i in s_pos
         partial_pos += i
