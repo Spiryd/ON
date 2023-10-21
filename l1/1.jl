@@ -1,5 +1,12 @@
 # Maksymilian Neumann 2023
 
+"""
+Wyszukuje epsilon maszynowy iteracyjnie
+# Arguments
+- `type`: typ zmiennoprszecinkowy to przetestowania
+# Returns
+- `macheps`: wyszukany epsilon
+"""
 function macheps(type)
     one_typed = one(type)
     macheps = one_typed
@@ -11,6 +18,13 @@ function macheps(type)
     return macheps * 2
 end
 
+"""
+Wyszukuje liczbe eta iteracyjnie
+# Arguments
+- `type`: typ zmiennoprszecinkowy to przetestowania
+# Returns
+- `eta`: wyszukany eta
+"""
 function eta(type)
     eta = one(type)
 
@@ -21,6 +35,13 @@ function eta(type)
     return eta
 end
 
+"""
+Wyszukuje liczbe max danego typu iteracyjnie
+# Arguments
+- `type`: typ zmiennoprszecinkowy to przetestowania
+# Returns
+- `machmax`: wyszukany max
+"""
 function machmax(type)
     machmax = prevfloat(one(type))
 

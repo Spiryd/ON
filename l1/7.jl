@@ -1,7 +1,8 @@
 # Maksymilian Neumann 2023
 
+global f(x) = sin(x) + cos(3x)
+
 function aprox(x_0::Float64, h::Float64)
-    f(x) = sin(x) + cos(3x)
     return (f(x_0 + h) - f(x_0)) / h
 end
 
