@@ -19,7 +19,7 @@ function mbisekcji(f, a::Float64, b::Float64, delta::Float64, epsilon::Float64)
     v = f(b)
     e =  b - a
     if sign(u) == sign(v) 
-        return (0, 0, 0, 1)
+        return (Nothing, Nothing, Nothing, 1)
     end
     for it in 1:10^6
         e = e/2
@@ -36,5 +36,4 @@ function mbisekcji(f, a::Float64, b::Float64, delta::Float64, epsilon::Float64)
             u = w
         end
     end
-    return (0, 0, 0, 1)
 end
