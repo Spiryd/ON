@@ -21,7 +21,7 @@ function mbisekcji(f, a::Float64, b::Float64, delta::Float64, epsilon::Float64)
     if sign(u) == sign(v) 
         return (Nothing, Nothing, Nothing, 1)
     end
-    for it in 1:10^6
+    for it in 1:10^8
         e = e/2
         c = a + e
         w = f(c)

@@ -1,3 +1,4 @@
+# Maksymilian Neumann
 module Meth
     include("1.jl")
     include("2.jl")

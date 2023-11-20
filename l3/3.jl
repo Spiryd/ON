@@ -15,21 +15,21 @@ returns `(r, v, it, err)`
 - `err`: error signal (0 - no error, 1 - did not get within precision )
 """
 function msiecznych(f, x0::Float64, x1::Float64, delta::Float64, epsilon::Float64, maxit::Int)
-    A = f(x0)
-    B = f(x1)
+    fa = f(x0)
+    fb = f(x1)
     for it in 1:maxit
-        if abs(A) < abs(B)
+        if abs(fa) < abs(fb)
             x0, x1 = x1, x0
-            A, B = B, A
+            fa, fb = fb, fa
         end
-        s = (x1 - x0)/(B - A)
+        s = (x1 - x0)/(fb - fa)
         x0 = x1
-        A = B
-        x1 = x1 - A * s
-        B = f(x1)
-        if abs(x1 - x0) < delta || abs(B) < epsilon
-            return x1, B, it, 0
+        fa = fb
+        x1 = x1 - fa * s
+        fb = f(x1)
+        if abs(x1 - x0) < delta || abs(fb) < epsilon
+            return (x1, fb, it, 0)
         end
     end
-    return x1, B, maxit, 1
+    return (x1, fb, maxit, 1)
 end
