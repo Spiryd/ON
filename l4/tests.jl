@@ -5,7 +5,7 @@ using .Interpol
 using Test
 
 @testset "$(rpad("test z wielomianem", 25))" begin
-    w = x -> 5*x^2 + 2*x - 12
+    w(x) = 5*x^2 + 2*x - 12
     x = [1., 2., 3., 4., 5.]
     y = w.(x)
     c = ilorazyRoznicowe(x, y)

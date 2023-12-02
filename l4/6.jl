@@ -4,8 +4,11 @@ include("interpol.jl")
 using .Interpol
 using Plots
 
-f = x -> abs(x)
-g = x -> 1/(1+x^2)
+# nasze funkcje
+f(x) = abs(x)
+g(x) = 1/(1+x^2)
+
+# kożystamy z naszych implementacji
 for n in [5, 10, 15]
     plot_f = rysujNnfx(f, -1., 1., n)
     plot_g = rysujNnfx(g, -5., 5., n)

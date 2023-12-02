@@ -5,19 +5,13 @@ export ilorazyRoznicowe, warNewton, naturalna, rysujNnfx
 using Plots
 
 """
-Funkcja obliczająca ilorazy różnicowe potrzebne do przedstawienia wielomianu 
-interpolacyjnego w postaci Newtona.
-
-# Dane
-x - wektor długości n zawierający węzły x_0, ..., x_n-1, gdzie 
-    x[i] = x_{i-1}
-
-f - wektor długości n zawierający wartości interpolowanej funkcji w węzłach,
-    gdzie f[i] = f(x_{i-1})
-
+# Opis
+Funkcja oblicza ilorazy różnicowe potrzebne do przedstawienia wielomianu interpolacyjnego w postaci Newtona.
+# Argumenty
+- `x`: wektor zawierający węzły x_0, ..., x_n-1, gdzie x[i] = x_{i-1}
+- `f`: wektor zawierający wartości interpolowanej funkcji w węzłach, gdzie f[i] = f(x_{i-1})
 # Wyniki
-fx - wektor długości n zawierający obliczone ilorazy różnicowe, gdzie
-    fx[i] = f[x_0, ..., x_{i-1}]
+- `fx`: wektor awierający obliczone ilorazy różnicowe, gdzie fx[i] = f[x_0, ..., x_{i-1}]
 """
 function ilorazyRoznicowe(x::Vector{Float64}, f::Vector{Float64})
     n = length(x)
@@ -35,19 +29,14 @@ end
 
 
 """
+# Opis
 Funkcja obliczająca wartość wielomianu interpolacyjnego w postaci Newtona.
-
-# Dane
-x - wektor długości n zawierający węzły x_0, ..., x_n-1, gdzie 
-    x[i] = x_{i-1}
-
-fx - wektor długości n zawierający obliczone ilorazy różnicowe, gdzie
-    fx[i] = f[x_0, ..., x_{i-1}]
-
-t - punkt, w którym należy obliczyć wartość wielomianu
-
+# Argumenty
+- `x`: wektor zawierający węzły x_0, ..., x_n-1, gdzie x[i] = x_{i-1}
+- `fx`: wektor zawierający obliczone ilorazy różnicowe, gdzie fx[i] = f[x_0, ..., x_{i-1}]
+- `t`: punkt, w którym należy obliczyć wartość wielomianu
 # Wyniki
-nt - wartość wielomianu w punkcie t
+- `nt`: wartość wielomianu w punkcie t
 """
 function warNewton(x::Vector{Float64}, fx::Vector{Float64}, t::Float64)
     n = length(x)
@@ -60,19 +49,13 @@ end
 
 
 """
-Funkcja wyznaczająca współczynniki dla postaci naturalnej wielomianu 
-interpolacyjnego danego w postaci Newtona.
-
-# Dane
-x - wektor długości n zawierający węzły x_0, ..., x_n-1, gdzie 
-    x[i] = x_{i-1}
-
-fx - wektor długości n zawierający obliczone ilorazy różnicowe, gdzie
-    fx[i] = f[x_0, ..., x_{i-1}]
-
+# Opis
+Funkcja wyznaczająca współczynniki dla postaci naturalnej wielomianu interpolacyjnego danego w postaci Newtona.
+# Argumenty
+- `x`: wektor długości n zawierający węzły x_0, ..., x_n-1, gdzie x[i] = x_{i-1}
+- `fx`: wektor długości n zawierający obliczone ilorazy różnicowe, gdzie fx[i] = f[x_0, ..., x_{i-1}]
 # Wyniki
-a - wektor długości n zawierający obliczone współczynniki postaci naturalnej, 
-    gdzie a[i] to współczynnik przy x^{i-1}
+- `a`: wektor długości n zawierający obliczone współczynniki postaci naturalnej, gdzie a[i] to współczynnik przy x^{i-1}
 """
 function naturalna(x::Vector{Float64}, fx::Vector{Float64})
     n = length(x)
@@ -89,18 +72,14 @@ end
 
 
 """
-Funkcja rysuje wielomian interpolacyjny i interpolowaną funkcję 
-w przedziale [a, b] na n+1 równoodległych punktach.
-
-# Dane
-f - funkcja do interpolacji zadana jako anonimowa funkcja
-
-a, b - przedział interpolacji
-
-n - stopień wielomianu interpolacyjnego
-
+# Opis
+Funkcja rysuje wielomian interpolacyjny i interpolowaną funkcję w przedziale [a, b] na n+1 równoodległych punktach.
+# Argumenty
+- `f`: funkcja do interpolacji zadana jako anonimowa funkcja
+- `a`, `b`: przedział interpolacji
+- `n`: stopień wielomianu interpolacyjnego
 # Wyniki
-p - obiekt rysunku z wykresami wielomianu i funkcji
+- `p`: obiekt rysunku z wykresami wielomianu i funkcji
 """
 function rysujNnfx(f,a::Float64,b::Float64,n::Int)
     x = zeros(n+1)
