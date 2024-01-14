@@ -5,8 +5,16 @@ module blocksys
 export gaussaian_elimination, gaussaian_elimination_with_partial_pivoting
 
 using Main.SparseBlockMatrices
-
-function gaussaian_elimination(A::SparseBlockMatrix, b::Vector{Float64})
+"""
+# Opis
+Funkcja używająca metodę eliminacji gaussa do rozwiązania układu równań liniowych.
+# Argumenty
+- `A`: macierz współczynników w postaci opisanej na liście
+- `b`: wektor prawych stron
+# Wyniki
+- `x`: wektor rozwiązań
+"""
+function gaussaian_elimination(A::SparseBlockMatrix, b::Vector{Float64})::Vector{Float64}
     n = A.size
     # Elimnation Stage
     for k in 1 : n-1
@@ -37,11 +45,19 @@ function gaussaian_elimination(A::SparseBlockMatrix, b::Vector{Float64})
     end
     return x
 end
-
+"""
+# Opis
+Funkcja używająca metodę eliminacji gaussa z częściowym wyborem elementu głównego do rozwiązania układu równań liniowych.
+# Argumenty
+- `A`: macierz współczynników w postaci opisanej na liście
+- `b`: wektor prawych stron
+# Wyniki
+- `x`: wektor rozwiązań
+"""
 function gaussaian_elimination_with_partial_pivoting(A::SparseBlockMatrix, b::Vector{Float64})::Vector{Float64}
     n = A.size
     p = [1:n;]
-    
+    # Elimnation Stage
     for k in 1 : n-1
         bound = get_bottom_row(A, k)
         j = reduce((x, y) -> abs(A.matrix[p[x], k]) >= abs(A.matrix[p[y], k]) ? x : y, k : bound)
@@ -49,8 +65,6 @@ function gaussaian_elimination_with_partial_pivoting(A::SparseBlockMatrix, b::Ve
         for i in k+1 : bound
             z = A.matrix[p[i], k] / A.matrix[p[k], k]
             A.matrix[p[i], k] = 0.0
-            # p[k] to najwyżej k + block_size, ponieważ poniżej są już zera
-            # można by ograniczyć to bardziej, na przykład pamiętając maksymalny dotychczas użyty indeks wiersza (łącznie z p[k])
             for j in k+1 : get_last_column(A, k + A.block_size)
                 A.matrix[p[i], j] -= z * A.matrix[p[k], j]
             end
@@ -63,7 +77,6 @@ function gaussaian_elimination_with_partial_pivoting(A::SparseBlockMatrix, b::Ve
     x[n] = b[p[n]] / A.matrix[p[n], n]
     for i in n-1 : -1 : 1
         x[i] = b[p[i]]
-        # analiza jak wyżej
         for j in i+1 : get_last_column(A, i + A.block_size)
             x[i] -= A.matrix[p[i], j] * x[j]
         end

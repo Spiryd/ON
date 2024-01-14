@@ -24,20 +24,12 @@ function sbm_zeros(size::Int, block_size::Int)
     return SparseBlockMatrix(spzeros(size, size), size, block_size, Int(size / block_size))
 end
 
-function get_first_column(M::SparseBlockMatrix, row::Int)
-    return max(1, row - ((row - 1) % M.block_size) - 1)
-end
-
 function get_last_column(M::SparseBlockMatrix, row::Int)
     return min(M.size, M.block_size + row)
 end
 
 function get_bottom_row(M::SparseBlockMatrix, column::Int)
     return min(M.size, column + M.block_size - (column % M.block_size))
-end
-
-function get_top_row(M::SparseBlockMatrix, column::Int)
-    return max(1, column - M.block_size)
 end
 
 end
